@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,7 +30,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
-					<a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="" class="img-fluid w-100"></a>
+					<a class="navbar-brand" href="index.html"><img src="/images/logo.png" alt="" class="img-fluid w-100"></a>
 				</div>
 			</div>
 		</div>
@@ -44,11 +47,11 @@
 				<div class="collapse navbar-collapse" id="navbarContent">
 					<ul id="menu" class="menu navbar-nav ">
 						<li class="nav-item dropdown  pl-0">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Home
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="index.html">Home 1</a>
+								<a class="dropdown-item" asp-controller="Home" asp-action="Index">Home 1</a>
 								<a class="dropdown-item" href="index-2.html">Home 2</a>
 								<a class="dropdown-item" href="index-3.html">Home 3</a>
 								<a class="dropdown-item" href="index-4.html">Home 4</a>
@@ -68,7 +71,7 @@
 						</li>
 
 						<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-						<li class="nav-item"><a href="fashion.html" class="nav-link">Category</a></li>
+						<li class="nav-item"><a asp-controller="Category" asp-action="Index" class="nav-link">Category</a></li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Post Formats
@@ -83,38 +86,21 @@
 						</li>
 						<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 						<li class="nav-item d-lg-none">
-							<div class="search_toggle p-3 d-inline-block bg-white"><i class="ti-search"></i></div>
+                            <div class="search_toggle p-3 d-inline-block bg-white"><i class="ti-search"></i>  </div>
+							
+							
 						</li>
+						
 					</ul>
 				</div>
 
-				<div class="text-right search d-none d-lg-block">
-					<div class="search_toggle"><i class="ti-search"></i></div>
-				</div>
+				<div> @Html.Partial("Search") </div>
 			</div>
 		</nav>
 
 	</header>
 
-	<!--search overlay start-->
-	<div class="search-wrap">
-		<div class="overlay">
-			<form action="#" class="search-form">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-10 col-9">
-							<input type="text" class="form-control" placeholder="Search..." />
-						</div>
-						<div class="col-md-2 col-3 text-right">
-							<div class="search_toggle toggle-wrap d-inline-block">
-								<i class="ti-close"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -135,7 +121,6 @@
 				<div class="row no-gutters" id="instafeed">
 				</div>
 			</div>
-		</div>
 		</div>
 
 		<div class="container">
