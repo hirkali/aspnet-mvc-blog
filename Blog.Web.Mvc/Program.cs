@@ -1,3 +1,5 @@
+using Blog.Web.Mvc.Data;
+
 namespace Blog.Web.Mvc
 {
     public class Program
@@ -8,8 +10,18 @@ namespace Blog.Web.Mvc
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDbContext>();
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                // Veritabaný servisine eriþim saðlar.
+                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                // Veritabanýný sil
+                context.Database.EnsureDeleted();
+                // Veritabanýný oluþturur
+                context.Database.EnsureCreated();
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
