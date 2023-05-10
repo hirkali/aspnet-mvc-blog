@@ -23,36 +23,17 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div>
-        @Html.Partial("_Header")
-    </div>
+    @Html.Partial("_Header")
 
-  
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @RenderBody()
 
     <section class="footer-2 section-padding gray-bg pb-5">
-        <!--Subscribe Starts-->
-        <div>
+        <div class="container">
             @Html.Partial("_Subscribe")
-        </div>
-
-        <!--Subscribe Ends-->
-
-        <!--Footer Starts-->
-        <div>
             @Html.Partial("_Footer")
         </div>
-
-        <!--Footer Ends-->
-
-
-
     </section>
+
     <!-- THEME JAVASCRIPT FILES
     ================================================== -->
     <!-- initialize jQuery Library -->
