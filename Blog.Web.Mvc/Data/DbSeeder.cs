@@ -26,10 +26,10 @@ namespace Blog.Web.Mvc.Data
 				// Yazıları oluşturma
 				var posts = new Post[]
 				{
-					new Post { Title = "Lorem Ipsum", Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", Id = 1 },
-					new Post { Title = "Spor Haberleri", Content = "Yerli ve yabancı spor haberleri...", Id = 2 },
-					new Post { Title = "Sağlık Haberleri", Content = "Yeni tedavi yöntemleri...", Id = 3 },
-					new Post { Title = "Müzik Dünyasından Haberler", Content = "Yeni albümler ve konserler hakkında güncel bilgiler...", Id = 4 }
+					new Post { Title = "Lorem Ipsum", Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+					new Post { Title = "Spor Haberleri", Content = "Yerli ve yabancı spor haberleri..." },
+					new Post { Title = "Sağlık Haberleri", Content = "Yeni tedavi yöntemleri..."},
+					new Post { Title = "Müzik Dünyasından Haberler", Content = "Yeni albümler ve konserler hakkında güncel bilgiler..." }
 				};
 
 				context.Posts.AddRange(posts);
