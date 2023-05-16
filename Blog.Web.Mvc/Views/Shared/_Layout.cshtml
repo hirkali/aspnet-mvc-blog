@@ -23,14 +23,17 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    @Html.Partial("_Header")
+    
+    @await Component.InvokeAsync("Navbar")
 
     @RenderBody()
 
     <section class="footer-2 section-padding gray-bg pb-5">
         <div class="container">
-            @Html.Partial("_Subscribe")
-            @Html.Partial("_Footer")
+           
+            <partial name="_Subscribe" />
+            <partial name="_Footer" />
+            
         </div>
     </section>
 
