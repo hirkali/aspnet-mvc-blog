@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Blog.Web.Mvc.Controllers
+namespace Blog.Web.Mvc.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class PageController : Controller
     {
-        [Route("/page/title-slug")]
-        public IActionResult Detail(int id)
+        public IActionResult Index()
         {
             return View();
         }

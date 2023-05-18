@@ -1,28 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blog.Web.Mvc.Data.Entity
+namespace Blog.Web.Mvc.Data.Entity;
+
+public class User
 {
-    public class User
-    {
-        [Key]
-        public int Id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
-        public string? Name { get; set; }
+    [Column(TypeName = "nvarchar(100)")]
+    public string? Name { get; set; }
 
-        [Column(TypeName = "nvarchar(200)")]
-        public string? Email { get; set; }
+    [Column(TypeName = "nvarchar(200)")]
+    public string? Email { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
+    [Column(TypeName = "nvarchar(100)")]
 
-        public string? City { get; set; }
+    public string? City { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
+    [Column(TypeName = "nvarchar(100)")]
 
-        public string? Password { get; set; }
+    public string? Password { get; set; }
 
-        [Column(TypeName = "varchar(20)")]
-        public string? Phone { get; set; }
-    }
+    [Column(TypeName = "varchar(20)")]
+    public string? Phone { get; set; }
 }
