@@ -1,11 +1,12 @@
-using Blog.Web.Mvc.Data;
+using Blog.Business;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>();
+
+builder.Services.AddBusinessServices(builder.Configuration);
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(o => {
@@ -15,17 +16,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 var app = builder.Build();
+
+
 using (var scope = app.Services.CreateScope())
 {
-    // Veritabaný servisine eriþim saðlar.
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    // Veritabanýný sil
-    context.Database.EnsureDeleted();
-    // Veritabanýný oluþturur
-    context.Database.EnsureCreated();
-
-    DbSeeder.Seed(context);
+   ServiceExtensions.EnsureDeletedAndCreated(scope);
 }
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

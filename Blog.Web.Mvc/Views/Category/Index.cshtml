@@ -22,13 +22,16 @@
                         <div class="col-lg-6 col-md-6">
                             <article class="post-grid mb-5">
                                 <div class="post-thumb mb-4">
-                                    <img src="/images/news/f1.jpg" alt="" class="img-fluid w-100">
+                                 <a asp-controller="Blog" asp-action="Detail" asp-route-id="@post.Id"><img src="/images/news/f1.jpg" alt="" class="img-fluid w-100"> </a>
                                 </div>
-                                <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">@post.Category.Name</span>
-                                <h3 class="post-title mt-1"><a href="blog-single.html">@post.Title</a></h3>
+                                @foreach (Category item in post.Categories)
+                                {
+                                    <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">@item.Name</span>
+                                }
+                                <h3 class="post-title mt-1"><a asp-controller="Blog" asp-action="Detail" asp-route-id="@post.Id">@post.Title</a></h3>
                                 <div style="justify-content:space-between;display:flex;">
-                                    <span class="mt-1 text-muted  text-capitalize">@post.CreatedAt.ToShortDateString()</span>
-                                    <a class="btn btn-secondary" href="/blog/detail?id=@post.Id"> Go</a>
+                                    <span class="mt-1 text-muted text-capitalize">@post.CreatedAt.ToShortDateString()</span>
+                                    <a class="btn btn-secondary" asp-controller="Blog" asp-action="Detail" asp-route-id="@post.Id">Detay</a>
                                 </div>
                             </article>
                         </div>

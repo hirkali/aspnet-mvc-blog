@@ -1,44 +1,36 @@
-﻿using Blog.Web.Mvc.Data;
-using Blog.Web.Mvc.Data.Entity;
+﻿using Blog.Business.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Mvc.Controllers
 {
-    public class BlogController : Controller
-    {
-        private readonly AppDbContext _db;
+	public class BlogController : Controller
+	{
+		private readonly PostService _ps;
 
-        public BlogController(AppDbContext db)
-        {
-            _db = db;
-        }
+		public BlogController(PostService ps)
+		{
+			_ps = ps;
+		}
 
-        public IActionResult Search(string query, int page = 1)
-        {
-            var posts = _db.Posts
-                .Include(p => p.Category)
-                .Where(e => e.Title.Contains(query))
-                .Skip((page - 1) * 10).Take(10)
-                .ToList();
+		public IActionResult Search(string query, int page = 1)
+		{
+			var posts = _ps.GetAll()
+				.Where(e => e.Title.Contains(query))
+				.Skip((page - 1) * 10).Take(10);
 
-            ViewBag.Query = query;
+			ViewBag.Query = query;
 
-            return View(posts);
-        }
+			return View(posts);
+		}
 
-        //[Route("/blog/title-slug")]
-        public IActionResult Detail(int id)
-        {
-            Post post = _db.Posts
-                .Include(p => p.Category)
-                .Include(p => p.User)
-                .Where(p=> p.Id == id)
-                .FirstOrDefault();
-           if (post == null) { 
-            return RedirectToAction("Index","Home");
-            }
-            return View(post);
-        }
-    }
+		public IActionResult Detail(int id)
+		{
+			var post = _ps.GetById(id);
+			if (post == null)
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			return View(post);
+		}
+	}
 }

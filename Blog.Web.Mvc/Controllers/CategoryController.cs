@@ -1,33 +1,31 @@
-﻿using Blog.Web.Mvc.Data;
+﻿using Blog.Business.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Mvc.Controllers
 {
-    public class CategoryController : Controller
-    {
-        private readonly AppDbContext _db;
+	public class CategoryController : Controller
+	{
+		private readonly PostService _ps;
+		private readonly CategoryService _cs;
 
-        public CategoryController(AppDbContext db)
-        {
-            _db = db;
-        }
+		public CategoryController(PostService ps, CategoryService cs)
+		{
+			_ps = ps;
+			_cs = cs;
+		}
 
-        // /category/index/1
-        // /category/software
-        [Route("/category/{slug}", Name = "CategorySlug")]
-        public IActionResult Index(string slug, int page = 1)
-        {
-            var posts = _db.Posts
-                .Include(p => p.Category)
-                .Where(e => e.Category.Slug == slug)
-                .Skip((page - 1) * 10).Take(10)
-                .ToList();
+		[Route("/category/{slug}", Name = "CategorySlug")]
+		public IActionResult Index(string slug, int page = 1)
+		{
+			var posts = _ps.GetAll()
+				.Where(e => e.Categories.Any(e => e.Slug == slug))
+				.Skip((page - 1) * 10).Take(10)
+				.ToList();
 
-            var category = _db.Categories.Where(e => e.Slug == slug).FirstOrDefault();
-            ViewBag.CategoryName = category.Name;
+			var category = _cs.GetBySlug(slug);
+			ViewBag.CategoryName = category.Name;
 
-            return View(posts);
-        }
-    }
+			return View(posts);
+		}
+	}
 }
